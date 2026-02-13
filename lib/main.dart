@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/auth/UI_Layer/Views/MainLoginPage.dart';
+import 'package:gym_tracker_app/features/auth/UI_Layer/Views/Login_Sign_In_V/Login_Sign_In_Page_V.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 219, 194, 66)),
       ),
-      home: MainLoginPage(),
+      home: MainLoginScreen(),
     );
   }
 }
