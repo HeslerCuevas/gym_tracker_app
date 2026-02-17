@@ -11,6 +11,10 @@ void LogInButtonPressed() {
 
 }
 
+void RegisterButtonPressed() {
+
+}
+
 void navigateBack(BuildContext context) {
   Navigator.pop(context);
 }
