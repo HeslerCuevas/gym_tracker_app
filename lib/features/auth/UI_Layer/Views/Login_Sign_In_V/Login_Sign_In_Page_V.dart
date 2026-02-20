@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/auth/UI_Layer/Views/Auth_Classes_Definition.dart';
-import 'package:gym_tracker_app/features/auth/UI_Layer/Views_Models/Login_Sign_In_VM.dart';
+import 'package:gym_tracker_app/features/auth/ui_layer/Views/Auth_Classes_Definition.dart';
+import 'package:gym_tracker_app/features/auth/ui_layer/Views_Models/Login_Sign_In_VM.dart';
 
 class MainLoginScreen extends StatelessWidget {
   const MainLoginScreen({super.key});

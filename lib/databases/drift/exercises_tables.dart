@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:drift/drift.dart';
 
 // ─────────────────────────────────────────────
@@ -76,15 +75,7 @@ class Exercises extends Table {
   IntColumn get primaryMuscleTargetId =>
       integer().references(MuscleTargets, #id)();
 
-  // About / instructions
-  TextColumn get instructions => text().nullable().withLength(max: 3000)();
-
-  /// Local path or asset path to a GIF animation
-  TextColumn get gifPath => text().nullable()();
-
-  /// Remote URL (for cloud sync later)
-  TextColumn get gifUrl => text().nullable()();
-
+  TextColumn get instructions => text().nullable()();
   BoolColumn get isCustom =>
       boolean().withDefault(const Constant(true))();
   DateTimeColumn get createdAt =>
@@ -96,6 +87,15 @@ class Exercises extends Table {
   TextColumn get serverId => text().nullable()();
 }
 
+class ExerciseImages extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get exerciseId => integer().references(Exercises, #id)();
+  TextColumn get imageUrl => text()();      // remote wger URL
+  TextColumn get localPath => text().nullable()(); // cached on device
+  BoolColumn get isMain => boolean().withDefault(const Constant(false))();
+  DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
+}
+
 // ─────────────────────────────────────────────
 // WORKOUT TEMPLATES
 // ─────────────────────────────────────────────
@@ -103,7 +103,7 @@ class Exercises extends Table {
 class WorkoutTemplates extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text().withLength(min: 1, max: 200)();
-  TextColumn get description => text().nullable().withLength(max: 3000)();
+  TextColumn get description => text().nullable()();
   DateTimeColumn get createdAt =>
       dateTime().withDefault(currentDateAndTime)();
   DateTimeColumn get updatedAt =>
@@ -163,6 +163,8 @@ class SessionExercises extends Table {
   TextColumn get serverId => text().nullable()();
   DateTimeColumn get updatedAt =>
       dateTime().withDefault(currentDateAndTime)();
+  DateTimeColumn get createdAt =>
+      dateTime().withDefault(currentDateAndTime)();
 }
 
 // ─────────────────────────────────────────────
@@ -190,5 +192,7 @@ class ExerciseSets extends Table {
   
   TextColumn get serverId => text().nullable()();
   DateTimeColumn get updatedAt =>
+      dateTime().withDefault(currentDateAndTime)();
+    DateTimeColumn get createdAt =>
       dateTime().withDefault(currentDateAndTime)();
 }

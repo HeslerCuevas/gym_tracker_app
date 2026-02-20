@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/General_Classes.dart';
+import 'package:gym_tracker_app/features/general_classes.dart';
 
 class WorkoutHome extends StatelessWidget {
   const WorkoutHome({super.key});

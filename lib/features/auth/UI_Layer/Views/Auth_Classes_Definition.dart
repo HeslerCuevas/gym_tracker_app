@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/auth/UI_Layer/Views/Login_Sign_In_V/Login_Sign_In_Page_V.dart';
-import 'package:gym_tracker_app/features/auth/UI_Layer/Views_Models/Login_Sign_In_VM.dart';
+import 'package:gym_tracker_app/features/auth/ui_layer/Views/Login_Sign_In_V/Login_Sign_In_Page_V.dart';
+import 'package:gym_tracker_app/features/auth/ui_layer/Views_Models/Login_Sign_In_VM.dart';
 import 'Forget_Password_V/Forget_Password_Enter_Email_V.dart';
 import 'Login_Sign_Up_V/Login_Sign_Up_V.dart';
 
