@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_tracker_app/features/auth/UI_Layer/Views/Auth_Classes_Definition.dart';
+import 'package:gym_tracker_app/features/auth/UI_Layer/Views_Models/Login_Sign_In_VM.dart';
 
 class MainLoginScreen extends StatelessWidget {
   const MainLoginScreen({super.key});
@@ -34,7 +35,7 @@ class MainLoginScreen extends StatelessWidget {
       const SizedBox(height: 25),
 
       //Log In Button Section
-      LogInRegisterButton(text: "Log In", onPressed: LogInButtonPressed)
+      LogInRegisterButton(text: "Log In", onPressed: () => LogInButtonPressed(context))
         ],
       ),
     );

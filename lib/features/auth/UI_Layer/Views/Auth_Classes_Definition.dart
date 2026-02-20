@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_tracker_app/features/auth/UI_Layer/Views/Login_Sign_In_V/Login_Sign_In_Page_V.dart';
 import 'package:gym_tracker_app/features/auth/UI_Layer/Views_Models/Login_Sign_In_VM.dart';
-import 'Forget_Password_V/Forget_Password_V.dart';
+import 'Forget_Password_V/Forget_Password_Enter_Email_V.dart';
 import 'Login_Sign_Up_V/Login_Sign_Up_V.dart';
 
 
@@ -156,7 +156,7 @@ class ForgetPasswordText extends StatelessWidget {
         alignment: Alignment.center,
         child: TextButton(
           onPressed: () {
-            navigateToNextScreen(context, const ForgetPasswordScreen());
+            navigateToNextScreen(context, const ForgetPasswordEnterEmailV());
           },
           child: const Text(
             "Forgot Your Password?",
@@ -217,7 +217,7 @@ class SpacedInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 25),
+        const SizedBox(height: 15),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: TextInputField(text: label),
