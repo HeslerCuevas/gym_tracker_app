@@ -37,6 +37,9 @@ dependencies:
   provider: ^6.1.0
   sqlite3: ^2.9.4
   sqlite3_flutter_libs: ^0.5.41
+  http: ^1.2.0
+  uuid: ^4.4.2
+  shared_preferences: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +73,7 @@ flutter:
   - assets/profile_black_logo.png
   - assets/history_black_logo.png
   - assets/exercise_black_logo.png
+  - assets/exercise_image_placeholder.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

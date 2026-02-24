@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_tracker_app/features/exercises/ui_layer/views/exercise_main_screen.dart';
 import 'package:gym_tracker_app/features/workout/UI_Layer/Views/Workout_Home_V.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,10 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       case 3:
         return const Center(
-          child: Text(
-            'Exercises Screen',
-            style: TextStyle(color: Colors.white, fontSize: 24),
-          ),
+          child: ExerciseMainScreen(),
         );
       case 4:
         return const Center(

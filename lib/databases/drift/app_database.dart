@@ -46,6 +46,40 @@ class AppDatabase extends _$AppDatabase {
   //Seed initial lookup data for categories, body parts, weight units, and set types
   Future<void> _seedLookupData() async {
   await batch((batch) {
+
+        batch.insertAll(
+    equipment,
+    [
+      EquipmentCompanion.insert(name: 'Not Specified'),
+    ],
+      mode: InsertMode.insertOrIgnore,
+  );
+
+    batch.insertAll(
+      bodyParts,
+      [
+        BodyPartsCompanion.insert(name: 'Not Specified'),
+        BodyPartsCompanion.insert(name: 'Chest'),
+        BodyPartsCompanion.insert(name: 'Back'),
+        BodyPartsCompanion.insert(name: 'Legs'),
+        BodyPartsCompanion.insert(name: 'Arms'),
+        BodyPartsCompanion.insert(name: 'Shoulders'),
+        BodyPartsCompanion.insert(name: 'Core'),
+        BodyPartsCompanion.insert(name: 'Full Body'),
+        BodyPartsCompanion.insert(name: 'Glutes'),
+        BodyPartsCompanion.insert(name: 'Calves'),
+        BodyPartsCompanion.insert(name: 'Neck'),
+      ],
+      mode: InsertMode.insertOrIgnore,
+    );
+
+    batch.insertAll(
+      muscleTargets,
+      [
+        MuscleTargetsCompanion.insert(name: 'Not Specified'),
+      ],
+      mode: InsertMode.insertOrIgnore,
+    );
     batch.insertAll(
       setTypes,
       [
@@ -70,6 +104,7 @@ class AppDatabase extends _$AppDatabase {
     batch.insertAll(
       categories,
       [
+        CategoriesCompanion.insert(name: 'Not Specified'),
         CategoriesCompanion.insert(name: 'Strength'),
         CategoriesCompanion.insert(name: 'Cardio'),
         CategoriesCompanion.insert(name: 'Flexibility'),
@@ -77,23 +112,6 @@ class AppDatabase extends _$AppDatabase {
         CategoriesCompanion.insert(name: 'Plyometrics'),
         CategoriesCompanion.insert(name: 'Power'),
         CategoriesCompanion.insert(name: 'Hypertrophy'),
-      ],
-      mode: InsertMode.insertOrIgnore,
-    );
-
-    batch.insertAll(
-      bodyParts,
-      [
-        BodyPartsCompanion.insert(name: 'Chest'),
-        BodyPartsCompanion.insert(name: 'Back'),
-        BodyPartsCompanion.insert(name: 'Legs'),
-        BodyPartsCompanion.insert(name: 'Arms'),
-        BodyPartsCompanion.insert(name: 'Shoulders'),
-        BodyPartsCompanion.insert(name: 'Core'),
-        BodyPartsCompanion.insert(name: 'Full Body'),
-        BodyPartsCompanion.insert(name: 'Glutes'),
-        BodyPartsCompanion.insert(name: 'Calves'),
-        BodyPartsCompanion.insert(name: 'Neck'),
       ],
       mode: InsertMode.insertOrIgnore,
     );
