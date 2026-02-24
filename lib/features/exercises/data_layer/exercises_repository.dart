@@ -249,13 +249,30 @@ class ExerciseRepository {
     ));
   }
 
-  Future<List<ExerciseListItem>> getExercises() async {
+  Future<List<ExerciseListItem>> getExercises({
+  String? equipment,
+  String? category,
+  String? muscle,
+  }) async {
     final query = _db.select(_db.exercises).join([
       leftOuterJoin(_db.bodyParts, _db.bodyParts.id.equalsExp(_db.exercises.bodyPartId)),
       leftOuterJoin(_db.exerciseImages, _db.exerciseImages.exerciseId.equalsExp(_db.exercises.id) & _db.exerciseImages.isMain.equals(true)),
+      leftOuterJoin(_db.equipment, _db.equipment.id.equalsExp(_db.exercises.equipmentId)),
+      leftOuterJoin(_db.categories, _db.categories.id.equalsExp(_db.exercises.categoryId)),
+      leftOuterJoin(_db.muscleTargets, _db.muscleTargets.id.equalsExp(_db.exercises.primaryMuscleTargetId)),
     ])
     ..where(_db.exercises.isActive.equals(true));
-
+    
+    //Filter conditions if provided:
+      if (equipment != null && equipment.isNotEmpty) {
+    query.where(_db.equipment.name.equals(equipment));
+    }
+    if (category != null && category.isNotEmpty) {
+    query.where(_db.categories.name.equals(category));
+    }
+    if (muscle != null && muscle.isNotEmpty) {
+    query.where(_db.muscleTargets.name.equals(muscle));
+    }
     return await query.map((row) {
       final exercise = row.readTable(_db.exercises);
       final bodyPart = row.readTableOrNull(_db.bodyParts);
@@ -326,5 +343,33 @@ class ExerciseRepository {
     secondaryMuscleGroups: secondaryMuscleTargets,
     imageUrls: imageList,
   );
+  }
+
+  Future<List<String>> getEquipmentOptions() async {
+    try {
+      final equipmentOptionsQuery = await _db.select(_db.equipment).get();
+      return equipmentOptionsQuery.map((item) => item.name).toList();
+    }
+    catch(e){
+      throw Exception('Could not get Equipment Options. Error: ${e.toString()}');
+    }
+  }
+  Future<List<String>> getCategoryOptions() async {
+    try {
+      final categoryOptionsQuery = await _db.select(_db.categories).get();
+      return categoryOptionsQuery.map((item) => item.name).toList();
+    }
+    catch(e){
+      throw Exception('Could not get Category Options. Error: ${e.toString()}');
+    }
+  }
+  Future<List<String>> getMuscleOptions() async {
+    try {
+      final muscleOptionsQuery = await _db.select(_db.muscleTargets).get();
+      return muscleOptionsQuery.map((item) => item.name).toList();
+    }
+    catch(e){
+      throw Exception('Could not get Muscle Options. Error: ${e.toString()}');
+    }
   }
 }
