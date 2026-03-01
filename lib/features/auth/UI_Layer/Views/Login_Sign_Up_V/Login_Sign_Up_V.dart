@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gym_tracker_app/features/auth/ui_layer/Views/Auth_Classes_Definition.dart';
-import 'package:gym_tracker_app/features/auth/ui_layer/Views_Models/Login_Sign_In_VM.dart';
+import 'package:gym_tracker_app/features/auth/ui_layer/views_models/login_sign_up_vm/login_sign_up_vm.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});

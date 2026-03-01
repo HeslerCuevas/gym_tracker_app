@@ -74,6 +74,7 @@ flutter:
   - assets/history_black_logo.png
   - assets/exercise_black_logo.png
   - assets/exercise_image_placeholder.png
+  - assets/search_image_icon.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -130,4 +130,8 @@ class ExerciseMainScreenVm extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+   filterExercisesBySearch() async {
+
+  }
 }

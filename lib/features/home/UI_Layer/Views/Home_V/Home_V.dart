@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/exercises/ui_layer/views/exercise_main_screen.dart';
+import 'package:gym_tracker_app/features/exercises/ui_layer/views/exercise_main_screen_v.dart';
 import 'package:gym_tracker_app/features/workout/UI_Layer/Views/Workout_Home_V.dart';
 
 class HomeScreen extends StatefulWidget {

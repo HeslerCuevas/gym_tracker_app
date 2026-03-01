@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_tracker_app/features/home/UI_Layer/Views/Home_V/Home_V.dart';
+import 'package:gym_tracker_app/features/home/ui_Layer/views/home_v/home_v.dart';
+import 'package:gym_tracker_app/features/home/ui_layer/views_models/home_vm.dart';
 
 bool _isSnackBarShowing = false;
-
-void navigateToNextScreen(BuildContext context, Widget destinationScreen) {
-  Navigator.push(
-    context,
-    MaterialPageRoute<void>(builder: (context) => destinationScreen),
-  );
-}
 
 void LogInButtonPressed(BuildContext context) {
   //API call to log in the user with the provided email and password
@@ -42,8 +36,4 @@ void LogInButtonPressed(BuildContext context) {
 
 void RegisterButtonPressed() {
 
-}
-
-void navigateBack(BuildContext context) {
-  Navigator.pop(context);
 }
