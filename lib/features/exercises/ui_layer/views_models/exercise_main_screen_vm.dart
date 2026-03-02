@@ -134,4 +134,12 @@ class ExerciseMainScreenVm extends ChangeNotifier {
    filterExercisesBySearch() async {
 
   }
+
+  Future<void> resetAndResync() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('hasCompletedInitialSync', false);
+    await _repository.clearAllExercises();
+  }
 }
+
+

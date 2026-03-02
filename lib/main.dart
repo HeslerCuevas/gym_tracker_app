@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 219, 194, 66),
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Color.fromARGB(255, 65, 79, 95),
+          backgroundColor: Color.fromARGB(255, 34, 39, 42),
         ),
       ),
       home: const MainLoginScreen(),

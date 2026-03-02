@@ -13,6 +13,8 @@ class ExerciseRepository {
   String _stripHtml(String html) {
   return html.replaceAll(RegExp(r'<[^>]*>'), '').trim();
 }
+
+
     Future<int> findOrCreateCategory(String name) async {
 
     // Check if category already exists (SEARCH)
@@ -125,6 +127,39 @@ class ExerciseRepository {
 }
 
   Future<void> importSingleExercise(Map<String, dynamic> data) async{
+
+    final translations1 = data['translations'] as List<dynamic>? ?? [];
+  final translation1 = translations1.firstWhere(
+    (t) => t['language'] == 2,
+    orElse: () => null,
+  );
+
+  // If no English translation exists, skip this exercise entirely
+  if (translation1 == null) return;
+
+  final name = translation1['name']?.toString() ?? '';
+
+  // 2. Filter: Name length
+  if (name.length < 3 || name.length > 28) return;
+
+  // 3. Filter: Suspicious patterns (Casing and 'SS')
+  // Note: We check if it's NOT empty to avoid false positives on empty strings
+  if (name.isEmpty || 
+      name.contains(' SS ') || 
+      name.toUpperCase() == name || 
+      name.toLowerCase() == name) {
+    return;
+  }
+
+  // 4. Filter: Styles (If you only want specific image styles)
+  final imageList1 = (data['images'] as List<dynamic>?) ?? [];
+  
+  // Example: Only keep images that are 'Style 1' (Line drawings)
+  final styleOneImages = imageList1.where((img) => img['style'].toString() == '1').toList();
+
+  // If no style 1 images exist, skip
+  if (styleOneImages.isEmpty) return;
+
 
     //Check if exercise already exist (SEARCH by externalId)
     final existing = await (_db.select(_db.exercises)
@@ -372,4 +407,10 @@ class ExerciseRepository {
       throw Exception('Could not get Muscle Options. Error: ${e.toString()}');
     }
   }
+
+  Future<void> clearAllExercises() async {
+  await _db.delete(_db.exerciseSecondaryMuscles).go();
+  await _db.delete(_db.exerciseImages).go();
+  await _db.delete(_db.exercises).go();
+}
 }

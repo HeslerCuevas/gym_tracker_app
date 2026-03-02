@@ -3,6 +3,7 @@ import 'package:gym_tracker_app/features/home/ui_layer/views_models/home_vm.dart
 import 'package:provider/provider.dart';
 import 'package:gym_tracker_app/features/exercises/ui_layer/views_models/exercise_main_screen_vm.dart';
 import 'package:gym_tracker_app/features/exercises/ui_layer/views/exercise_create_screen_v.dart';
+import 'package:gym_tracker_app/features/exercises/ui_layer/widgets/exercise_card.dart';
 
 class ExerciseMainScreen extends StatefulWidget {
   const ExerciseMainScreen({super.key});
@@ -17,7 +18,8 @@ class _ExerciseMainScreenState extends State<ExerciseMainScreen> {
           void initState() {
           super.initState();
       Future.microtask(() async {
-        final vm = context.read<ExerciseMainScreenVm>();
+      final vm = context.read<ExerciseMainScreenVm>();
+      await vm.resetAndResync(); // TEMPORARY — remove after testing
       await vm.syncIfNeeded();
       await vm.loadFilterOptions();
       await vm.loadExercises();
@@ -25,19 +27,46 @@ class _ExerciseMainScreenState extends State<ExerciseMainScreen> {
   );
   }
 
-    @override
+  Widget _buildBody(ExerciseMainScreenVm vm) {
+  if (vm.syncStatus == SyncStatus.syncing) {
+    return const Center(child: CircularProgressIndicator(
+      color: Colors.blue
+    ));
+  }
+  if (vm.isLoading) {
+    return const Center(child: CircularProgressIndicator(
+      color: Colors.blue
+    ));
+  }
+  if (vm.errorMessage != null) {
+    return Center(child: Text(vm.errorMessage!, style: const TextStyle(color: Colors.white)));
+  }
+  if (vm.exercises.isEmpty) {
+    return const Center(child: Text('No exercises found', style: TextStyle(color: Colors.grey)));
+  }
+  debugPrint('Exercises loaded: ${vm.exercises.length}');
+  return ListView.builder(
+    padding: EdgeInsets.only(top: 10),
+      cacheExtent: 500,
+      itemCount: vm.exercises.length,
+  itemBuilder: (context, index) {
+    return ExerciseCard(exercise: vm.exercises[index]);
+  },
+  );
+}
+
+  @override
   Widget build(BuildContext context) {
+
+  final vm = context.watch<ExerciseMainScreenVm>();
+
     return Scaffold(
       backgroundColor: const Color(0xFF0A0A0A),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(175.0), //Adjust Space Between App Bar Top and Bottom
         child: const ExercisesScreenAppBar(),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 5),
-        ],
-      ),
+      body: _buildBody(vm),
     );
   }
 }
@@ -55,6 +84,7 @@ class _ExercisesScreenAppBarState extends State<ExercisesScreenAppBar> {
     @override
     Widget build(BuildContext context) {
       return AppBar(
+        
         flexibleSpace: Column(
           children: [
             Container(height: MediaQuery.of(context).padding.top, color: Colors.black), //Manual Status Bar
@@ -134,9 +164,6 @@ class SearchExerciseBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context){
-
-    final vm = context.watch<ExerciseMainScreenVm>();
-
     return TextField(
         textAlignVertical: TextAlignVertical.center,
         textAlign: TextAlign.left,
