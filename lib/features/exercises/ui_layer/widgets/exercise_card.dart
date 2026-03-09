@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gym_tracker_app/features/exercises/data_layer/models/exercise_list_item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:gym_tracker_app/features/exercises/ui_layer/views_models/exercise_detail_screen_vm.dart';
 
 class ExerciseCard extends StatelessWidget {
   final ExerciseListItem exercise;
@@ -10,7 +11,12 @@ class ExerciseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
   onTap: () {
-    // navigation goes here
+      Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => ExerciseDetailScreenVm(exerciseId: exercise.id),
+    ),
+  );
   },
   child: Column(
   children: [
